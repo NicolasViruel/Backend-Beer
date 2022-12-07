@@ -1,19 +1,19 @@
 const express = require("express")
 const conectarDB = require("./database")
+require("dotenv").config()
+
+const UserRoutes = require("./routers/user")
+
+//controladores
+const UserControllers = require("./controllers/userControllers")
 const app = express()
 
 
 //conexion a la base
 conectarDB()
 
-app.get("/api/users", (req , res) =>{
-    if (req.headers.authorization) {
-       return res.status(203).send ("Hello world")
-        
-    }else{
-        res.status(400).send({msg: "Falta el header de authorization"})
-    }
-})
+//ruta de usuarios
+app.use('/api/users', UserRoutes)
 
 const port = 4000
 app.listen(port , () =>{
