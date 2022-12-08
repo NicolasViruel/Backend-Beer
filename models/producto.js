@@ -42,7 +42,8 @@ const ProductoSchema = mongoose.Schema({
     Avaliable:{
         type: Boolean,
         defaul:false,
-    }
+    },
+    
 
 })
  module.exports = mongoose.model("Producto",ProductoSchema )
