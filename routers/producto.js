@@ -9,10 +9,10 @@ router.get('/', productosControllers.getProducts)
 //Recursos para crear los productos:
 router.post('/', productosControllers.createProducts)
 //Recursos para editar los productos:
-router.put('/', productosControllers.updateProducts)
+router.put('/:id', productosControllers.updateProducts)
 //Recursos para borrar los productos:
-router.delete('/', productosControllers.deleteProducts)
+router.delete('/:id', productosControllers.deleteProducts)
 //Recursos para buscar los productos:
-router.get('/', productosControllers.findProducts)
+router.get('/:id', productosControllers.findProducts)
 
 module.exports=router

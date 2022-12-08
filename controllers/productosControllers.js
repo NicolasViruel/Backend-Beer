@@ -9,7 +9,7 @@ const getProducts = async (req , res) =>{
             return res.status(200).send([])
         }
     } catch (error) {
-        return res.status(200).send({msg:"Fallo al intentar optener los productos"})
+        return res.status(400).send({msg:"Fallo al intentar optener los productos"})
         
     }
      
@@ -42,21 +42,54 @@ const createProducts = async (req , res) =>{
     return res.status(200).send(producto)
   } catch (error) {
     console.log(error);
-    return res.status(400).send({msg:"El producto ya existe"})
+    return res.status(400).send({msg:"Error al intentar crear el producto, producto existente o mal cargado"})
     
   }
 }
 //editar los productos de la Base:
-const updateProducts = (req , res) =>{
+const updateProducts = async (req , res) =>{
+// desestructuramos el id de los params:
+const {id}=req.params
+//accedemos al body
+const productoData = req.body
+try {
+//buscamos el producto por el id
+const productoDB = await ProductosModel.findById(id)
+//reemplazamos el productos, por los valores del body
+await ProductosModel.findByIdAndUpdate(id,productoData)
+res.status(200).send({msg:"Producto actualizado correctamente"})
+
+} catch (error) {
+    res.status(400).send({msg:"El Producto no pudo ser actualizado"})
+    
+}    
   
 }
 //borrar los productos de la Base:
-const deleteProducts = (req , res) =>{
+const deleteProducts =  async(req , res) =>{
+    const {id} =req.params
+    try {
+        await ProductosModel.findByIdAndDelete(id)
+        return res.status(200).send({msg:"Producto borrado correctamente"})
+    } catch (error) {
+        res.status(400).send({msg:"El Producto no pudo ser eliminado"})
+        
+    }
   
 }
 //buscar los productos de la Base:
-const findProducts = (req , res) =>{
-  
+const findProducts = async(req , res) =>{
+    const {id}=req.params
+    try {
+        const productosBuscado= await ProductosModel.findById(id)
+        
+            return res.status(200).send(productosBuscado)            
+         
+    } catch (error) {
+        return res.status(400).send({msg:"Producto no encontrado"})
+        
+    }
+
 }
 
 module.exports={
