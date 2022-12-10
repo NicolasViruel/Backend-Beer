@@ -2,6 +2,8 @@
 const mongoose = require ('mongoose')
 mongoose.set('strictQuery', true);
 
+
+
 const ProductoSchema = mongoose.Schema({
     ProductName:{
         type:String,
@@ -47,4 +49,7 @@ const ProductoSchema = mongoose.Schema({
     
 
 })
+
+
+
  module.exports = mongoose.model("Producto",ProductoSchema )

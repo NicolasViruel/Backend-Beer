@@ -1,8 +1,36 @@
 const ProductosModel = require("../models/producto")
 //obtener los productos de la Base:
 const getProducts = async (req , res) =>{
+    const query = req.query
+    const { name, detalle} = query
     try {
-        const productos= await ProductosModel.find()
+        let productos
+        if (name || detalle) {
+            let search
+            if (name && detalle) {
+                console.log(name , detalle)
+                search ={   $or: [
+                    {'ProductName' : { "$regex": name, "$options": "i" }},
+                    {'Productdetalle' : { "$regex": detalle, "$options": "i" }}
+                 ]}
+                // search = {'ProductName' : { "$regex": name, "$options": "i" }, 'Productdetalle' : { "$regex": detalle, "$options": "i" } } 
+                 
+            } else if (detalle) {
+                search = {'Productdetalle' : { "$regex": detalle, "$options": "i" } } 
+                
+            }else if(name) {
+                console.log(name)
+                
+                search = { "ProductName": { "$regex": name, "$options": "i" } }
+                 
+            }
+            console.log(search)
+
+            productos  = await ProductosModel.find(search)
+        } else {
+            productos= await ProductosModel.find()
+        }
+         
         if (productos) {
             return res.status(200).send(productos)            
         } else{
