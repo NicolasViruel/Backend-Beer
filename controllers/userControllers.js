@@ -18,7 +18,6 @@ const getUsers = async(req , res) =>{
 
 const registerUser = async (req , res) =>{
     
-        // console.log(req.body);
         const {name , password, email} = req.body;
 
         const newUser = new UserModel ({
@@ -32,14 +31,19 @@ const registerUser = async (req , res) =>{
            const user =  await newUser.save()
            return res.status(200).send(user)
         } catch (error) {
-            res.status(400).send({msg:"El usuario ya existe"})
+            res.status(400).send({msg:"User already exists"})
             console.log(error);
         }
 
 }
 
 
+
+
+
+
+
 module.exports ={
     getUsers,
-    registerUser
+    registerUser,
 }
