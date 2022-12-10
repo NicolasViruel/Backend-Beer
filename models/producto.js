@@ -1,5 +1,6 @@
 
 const mongoose = require ('mongoose')
+mongoose.set('strictQuery', true);
 
 const ProductoSchema = mongoose.Schema({
     ProductName:{
