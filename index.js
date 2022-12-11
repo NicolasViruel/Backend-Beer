@@ -8,7 +8,6 @@ const UserRoutes = require("./routers/user");
 const AuthRoutes = require("./routers/auth");
 
 //controladores
-const UserControllers = require("./controllers/userControllers");
 const app = express();
 
 //parsear body

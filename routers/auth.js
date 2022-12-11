@@ -1,12 +1,16 @@
 const express = require("express")
-const AuthoControllers= require("../controllers/authoControllers")
+const AuthControllers= require("../controllers/authControllers")
 
 const router = express.Router()
 
-router.post("/register", AuthoControllers.register);
-router.post("/login", AuthoControllers.login);
+router.post("/register", AuthControllers.register);
+router.post("/login", AuthControllers.login);
 //verificacion del usuario
-router.post("/:id/verify/:token", AuthoControllers.verifyToken);
+router.get("/:id/verify/:token", AuthControllers.verifyToken);
+//recuperar contraseña
+router.post("/recovery-password", AuthControllers.recoveryPassword);
+//ruta para cambiar contraseña
+router.put("/recovery-password/new-password", AuthControllers.newPassword) 
 
 
 module.exports = router;

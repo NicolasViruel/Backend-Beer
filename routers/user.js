@@ -4,9 +4,13 @@ const AuthMiddleware = require("../middleware/authenticated")
 
 const router = express.Router()
 
-//recurso para traer todos los usuarios
+//recurso para Traer todos los usuarios
 router.get("/", AuthMiddleware.isAuth , UserControllers.getUsers)
-//recurso para crear un usuario
-router.post("/", AuthMiddleware.isAuth, AuthMiddleware.isAdmin ,UserControllers.registerUser)
+//recurso para Crear un usuario
+router.post("/", AuthMiddleware.isAuth, AuthMiddleware.isAdmin ,UserControllers.createUser)
+//recurso para Modificacion de un usuario
+router.put("/:id", AuthMiddleware.isAuth, AuthMiddleware.isAdmin ,UserControllers.updateUser)
+//recurso para Eliminar un usuario
+router.delete("/:id", AuthMiddleware.isAuth, AuthMiddleware.isAdmin ,UserControllers.deleteUser)
 
 module.exports = router;

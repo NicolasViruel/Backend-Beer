@@ -1,18 +1,22 @@
 const mongoose = require("mongoose")
+mongoose.set('strictQuery', true);
 
-const UserSchema = mongoose.Schema ({
-    name: String,
-    email: {
-        type: String,
+const TokenSchema = mongoose.Schema ({
+    userid:{
+        type: mongoose.Schema.Types.ObjectId,
         require: true,
+        ref: "usuario",
         unique: true
     },
-    password: String,
-    role: String,
-    active:{
-        type: Boolean,
-        default: false
+    token:{
+        type: String,
+        required: true,
+    },
+    create_at:{
+        type: Date,
+        default: Date.now,
+        expires: 3600
     }
-})
+});
 
-module.exports = mongoose.model("Usuarios" , UserSchema)
+module.exports = mongoose.model("Token" , TokenSchema)
