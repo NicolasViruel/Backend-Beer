@@ -6,7 +6,7 @@ const cors = require("cors")
 //Routers
 const UserRoutes = require("./routers/user");
 const AuthRoutes = require("./routers/auth");
-
+const ProductsRoutes = require("./routers/producto")
 //controladores
 const app = express();
 
@@ -14,9 +14,6 @@ const app = express();
 app.use(bodyParser.urlencoded( {extended:true} ));
 app.use(bodyParser.json());
 app.use(cors());
-
-const UserRoutes = require("./routers/user")
-const ProductsRoutes = require("./routers/producto")
 
 //conexion a la base
 conectarDB()
@@ -29,10 +26,12 @@ app.use(cors())
 app.use('/api/users', UserRoutes);
 //ruta de Autenticacion
 app.use('/api/auth', AuthRoutes)
+//ruta de productos
+app.use('/api/products', ProductsRoutes)
 
 
 //conexion al puerto
 const port = 4000
-app.use('/api/users', UserRoutes)
-//ruta de productos
-app.use('/api/productos', ProductsRoutes)
+app.listen(port , () =>{
+    console.log(`server listen in ${port}`);
+})
