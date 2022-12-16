@@ -130,33 +130,35 @@ const recoveryPassword = async (req, res) =>{
         await nodemailer.sendEmail(email, "app@tu-aplicacion.com", link)
 
         //enviamos el email con la ruta del formulario con el password //dominioDelFront/new-password/:token
-        res.status(200).send({msg:"Revisa tu correo para terminar el proceso"})
+        res.status(200).send({msg:"Check your email to finish the process"})
     } catch (error) {
         console.log(error);
-        return res.status(500).send("error del servidor")
+        return res.status(500).send("Server Error")
     }
 }
 
 const newPassword = async(req, res) =>{
+    // http://www.dominiofrontend.com/recovery-pass/60a1ef106ba77723462b266e8e879fe18ccdf955a1329b1819133d31ea3c1e2a
     const {password : newPassword} = req.body
     if (!req.headers.token) {
-        return res.status(400).send({msg:"Falta headers token"})
+        return res.status(400).send({msg:"Missing headers token"})
     }
 
     try {
         const tokenHeader = req.headers.token.replace("Bearer ", "") ;
         const token = await Token.findOne({token: tokenHeader })
         if (!token) {
-            return res.status(400).send({msg:"Error en el token"})
+            return res.status(400).send({msg:"Token error"})
         }
-        const user = await User.findOne(token.userId)
+        const user = await User.findOne(token.userId);
+        console.log(user);
         if (!user) {
-            return res.status(400).send({msg:"Error en el usuario"})
+            return res.status(400).send({msg:"User error"})
         }
 
         const isMatch = bcrypt.compareSync(newPassword, user.password)
         if (isMatch) {
-            return res.status(400).send({msg:"No se puede repetir la clave anterior"})
+            return res.status(400).send({msg:"Cannot repeat previous key"})
         }
         console.log(user.password, newPassword);
         
@@ -166,12 +168,12 @@ const newPassword = async(req, res) =>{
         await token.remove()
 
         await User.findByIdAndUpdate( user._id , {password: passwordHash});
-        return res.status(200).send({ msg:"Constraseña cambiada Exitosamente"});
+        return res.status(200).send({ msg:"Password Changed Successfully"});
        
     
     } catch (error) {
         console.log(error);
-        return res.status(500).send({msg:"Error en el cambio de la Contraseña"})        
+        return res.status(500).send({msg:"Password change Error"})        
     }
 }
 

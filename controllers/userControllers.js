@@ -57,9 +57,26 @@ const deleteUser = async (req, res) => {
 
 }
 
+const getUser = async (req , res) =>{
+  const { user_id:id } = req.user;
+  // console.log(req.user);
+  try {
+    const user =  await UserModel.findById(id);
+    //si no existe el usuario
+    if (!user) {
+      return res.status(404).send ({msg:"User not found"});     
+  }
+  return res.status(200).send(user)
+  } catch (error) {
+    console.log(error);
+     return res.status(500).send({msg:"Failed to find user"});
+  }
+}
+
 module.exports = {
   getUsers,
   createUser,
   updateUser,
-  deleteUser
+  deleteUser,
+  getUser
 };

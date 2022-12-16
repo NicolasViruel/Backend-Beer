@@ -2,7 +2,7 @@ const express = require("express");
 const conectarDB = require("./database");
 const bodyParser = require("body-parser");
 require("dotenv").config();
-
+const cors = require("cors")
 //Routers
 const UserRoutes = require("./routers/user");
 const AuthRoutes = require("./routers/auth");
@@ -13,6 +13,7 @@ const app = express();
 //parsear body
 app.use(bodyParser.urlencoded( {extended:true} ));
 app.use(bodyParser.json());
+app.use(cors());
 //conexion a la base
 conectarDB()
 
