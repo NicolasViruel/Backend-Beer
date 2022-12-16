@@ -1,11 +1,18 @@
 const express = require("express")
 const UserControllers = require("../controllers/userControllers")
+const AuthMiddleware = require("../middleware/authenticated")
 
 const router = express.Router()
 
-//recurso para traer todos los usuarios
-router.get(" /", UserControllers.getUsers)
-//recurso para crear un usuario
-router.post("/", UserControllers.registerUser)
+//recurso para Traer todos los usuarios
+router.get("/", AuthMiddleware.isAuth , AuthMiddleware.isAdmin , UserControllers.getUsers)
+//rutas de usuario (trae un solo usuario la base de datos)
+router.get('/info' ,AuthMiddleware.isAuth, UserControllers.getUser)
+//recurso para Crear un usuario
+router.post("/", AuthMiddleware.isAuth, AuthMiddleware.isAdmin ,UserControllers.createUser)
+//recurso para Modificacion de un usuario
+router.put("/:id", AuthMiddleware.isAuth, AuthMiddleware.isAdmin ,UserControllers.updateUser)
+//recurso para Eliminar un usuario
+router.delete("/:id", AuthMiddleware.isAuth, AuthMiddleware.isAdmin ,UserControllers.deleteUser)
 
 module.exports = router;
