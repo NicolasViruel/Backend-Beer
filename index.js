@@ -14,8 +14,16 @@ const app = express();
 app.use(bodyParser.urlencoded( {extended:true} ));
 app.use(bodyParser.json());
 app.use(cors());
+
+const UserRoutes = require("./routers/user")
+const ProductsRoutes = require("./routers/producto")
+
 //conexion a la base
 conectarDB()
+//parseamos el Body:
+app.use(bodyParser.urlencoded({extended:true}))
+app.use(bodyParser.json())
+app.use(cors())
 
 //ruta de usuarios
 app.use('/api/users', UserRoutes);
@@ -25,6 +33,6 @@ app.use('/api/auth', AuthRoutes)
 
 //conexion al puerto
 const port = 4000
-app.listen(port , () =>{
-    console.log(`server listen in ${port}`);
-})
+app.use('/api/users', UserRoutes)
+//ruta de productos
+app.use('/api/productos', ProductsRoutes)
