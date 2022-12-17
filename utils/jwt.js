@@ -9,7 +9,9 @@ const createToken = (user) =>{
         user_id : user._id,
         iat : Date.now(),
         exp: expToken.getTime(),
-        role: user.role
+        role: user.role,
+        active: user.active
+
     }
     return jwt.sign(payload, process.env.JWT_KEY)
 }

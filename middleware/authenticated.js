@@ -10,8 +10,13 @@ const isAuth = (req, res , next)=>{
         try {
             const payload = utils_jwt.decoded(token);
             
-            req.user = payload
-            next()
+            
+            if(payload.active){
+                req.user = payload
+                next()
+            }else{
+            res.status(400).send({msg:"Check your email to verify active"});   
+            }
         } catch (error) {
             res.status(400).send({msg:"Error you are not authorized"});
             
