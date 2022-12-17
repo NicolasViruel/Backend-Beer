@@ -20,7 +20,7 @@ const createUser = async (req, res) => {
     name,
     password,
     email,
-    role: "user",
+    role: "admin",
   });
 
   try {

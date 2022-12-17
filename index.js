@@ -27,7 +27,7 @@ app.use('/api/users', UserRoutes);
 //ruta de Autenticacion
 app.use('/api/auth', AuthRoutes)
 //ruta de productos
-app.use('/api/products', ProductsRoutes)
+app.use('/api/productos', ProductsRoutes)
 
 
 //conexion al puerto
