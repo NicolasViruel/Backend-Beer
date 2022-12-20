@@ -3,6 +3,8 @@ const utils_jwt = require("../utils/jwt")
 const isAuth = (req, res , next)=>{
 
     if (!req.headers.authorization) {
+
+        console.log(res);
        return res.status(400).send({msg:"authorization header missing"});
     } else {
         const token = req.headers.authorization.replace("Bearer ", "");

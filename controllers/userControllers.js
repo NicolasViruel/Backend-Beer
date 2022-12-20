@@ -73,10 +73,26 @@ const getUser = async (req , res) =>{
   }
 }
 
+//buscar un usuario de la Base:
+const findUser = async(req , res) =>{
+  const {id}=req.params
+  try {
+      const userSerch= await UserModel.findById(id)
+      
+          return res.status(200).send(userSerch)            
+       
+  } catch (error) {
+      return res.status(400).send({msg:"User not found"})
+      
+  }
+
+}
+
 module.exports = {
   getUsers,
   createUser,
   updateUser,
   deleteUser,
-  getUser
+  getUser,
+  findUser
 };

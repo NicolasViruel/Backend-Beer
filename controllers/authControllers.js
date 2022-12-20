@@ -15,7 +15,8 @@ const register = async(req, res)=>{
         name,
         email:email.toLowerCase(),
         password,
-        role:"admin"
+        role:"user",
+        active: true
     })
 
     const salt = bcrypt.genSaltSync(Number(process.env.SALT));
