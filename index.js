@@ -7,6 +7,7 @@ const cors = require("cors")
 const UserRoutes = require("./routers/user");
 const AuthRoutes = require("./routers/auth");
 const ProductsRoutes = require("./routers/producto")
+const ProductsFavorites = require("./routers/favorites");
 //controladores
 const app = express();
 
@@ -28,6 +29,9 @@ app.use('/api/users', UserRoutes);
 app.use('/api/auth', AuthRoutes)
 //ruta de productos
 app.use('/api/productos', ProductsRoutes)
+//ruta de Favoritos
+app.use('/api/favorites', ProductsFavorites)
+
 
 
 //conexion al puerto
