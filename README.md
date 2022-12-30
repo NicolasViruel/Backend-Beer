@@ -2,10 +2,10 @@
 
 ## Nombre del proyecto: Born to drink beer🍻
 
-#### Proyecto final de Rolling Code School. es un e-commerce de una cerveceria, se utilizó NodeJs, bcryptJs, crypto, express, Json web token, mongoose y nodemailes para el back-end.
+#### Proyecto final de Rolling Code School. es un e-commerce de una cerveceria, se utilizó NodeJs, bcryptJs, crypto, express, Json web token, mongoose y nodemailers para el back-end.
 
 ## Pre-requisitos 📋
-#### Cosas que se necesitan tener instaladas o configuradas previamente para utilizar tu proyecto
+#### Se necesitan tener instalado o configurado previamente para utilizar tu proyecto
 
 #### -NodeJS 
 #### -Npm (viene incluido en NodeJS) 
@@ -47,7 +47,7 @@
 #### 4. Express
 #### 5. Json web token
 #### 6. Mongoose
-#### 7. Nodemailes
+#### 7. Nodemailers
 
 
 ## Integrantes del Proyecto
