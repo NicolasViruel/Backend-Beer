@@ -3,18 +3,22 @@ const conectarDB = require("./database");
 const bodyParser = require("body-parser");
 require("dotenv").config();
 const cors = require("cors")
+
+
 //Routers
 const UserRoutes = require("./routers/user");
 const AuthRoutes = require("./routers/auth");
 const ProductsRoutes = require("./routers/producto")
 const ProductsFavorites = require("./routers/favorites");
+const ControlPayment = require("./routers/payments")
+const mercadopago = require("mercadopago");
+// Agrega credenciales
+mercadopago.configure({
+  access_token: process.env.MP_TOKEN,
+});
+
 //controladores
 const app = express();
-
-//parsear body
-app.use(bodyParser.urlencoded( {extended:true} ));
-app.use(bodyParser.json());
-app.use(cors());
 
 //conexion a la base
 conectarDB()
@@ -31,8 +35,8 @@ app.use('/api/auth', AuthRoutes)
 app.use('/api/productos', ProductsRoutes)
 //ruta de Favoritos
 app.use('/api/favorites', ProductsFavorites)
-
-
+//ruta de MercadoPago
+app.use('/api/payments',ControlPayment )
 
 //conexion al puerto
 const port = 4000
