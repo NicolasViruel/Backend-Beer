@@ -42,7 +42,7 @@ const register = async(req, res)=>{
         if (error.code === 11000) {
             return res.status(500).send({msg:"The email already exists in the database"});
         }else{
-            console.error
+            console.error(error)
             return res.status(500).send({msg:"Failed to create user"});
         }
     }
@@ -73,7 +73,7 @@ const login = async (req, res)=>{
            return res.status(404).send({msg:"User not found"})
         }
     } catch (error) {
-        console.error
+        console.error(error)
         res.status(500).send({msg:"User not found error"})
     }
 
@@ -96,7 +96,7 @@ const verifyToken = async (req , res) =>{
         await tokenVerify.remove()
 
     } catch (error) {
-        console.error
+        console.error(error)
         return  res.status(500).send({msg:"Mistake!! Try again"})
     }
 
@@ -133,7 +133,7 @@ const recoveryPassword = async (req, res) =>{
         //enviamos el email con la ruta del formulario con el password //dominioDelFront/new-password/:token
         res.status(200).send({msg:"Check your email to finish the process"})
     } catch (error) {
-        console.error
+        console.error(error)
         return res.status(500).send("Server Error")
     }
 }
@@ -173,7 +173,7 @@ const newPassword = async(req, res) =>{
        
     
     } catch (error) {
-        console.error
+        console.error(error)
         return res.status(500).send({msg:"Password change Error"})        
     }
 }

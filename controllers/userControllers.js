@@ -28,7 +28,7 @@ const createUser = async (req, res) => {
     return res.status(200).send(user);
   } catch (error) {
     res.status(400).send({ msg: "User already exists" });
-    console.error
+    console.error(error)
   }
 };
 
@@ -39,7 +39,7 @@ const updateUser = async(req , res)=>{
     await UserModel.findByIdAndUpdate( id, userDate)
    return res.status(200).send({msg:"The user has been edited successfully"})
   } catch (error) {
-    console.error
+    console.error(error)
    return res.status(500).send({msg:"Error editing user"})
     
   }
@@ -68,7 +68,7 @@ const getUser = async (req , res) =>{
   }
   return res.status(200).send(user)
   } catch (error) {
-    console.error
+    console.error(error)
      return res.status(500).send({msg:"Failed to find user"});
   }
 }

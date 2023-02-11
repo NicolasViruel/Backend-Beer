@@ -22,7 +22,7 @@ const sendEmail = async (email, remitente, text) => {
           console.log("The email has been sent");
           
     } catch (error) {
-        console.error
+        console.error(error)
         console.log("Error the email was not sent");
     }
 }

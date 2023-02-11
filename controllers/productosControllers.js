@@ -69,7 +69,7 @@ const createProducts = async (req , res) =>{
     console.log(producto);
     return res.status(200).send(producto)
   } catch (error) {
-    console.error
+    console.error(error)
     return res.status(400).send({msg:"Error al intentar crear el producto, producto existente o mal cargado"})
     
   }
