@@ -7,6 +7,7 @@ const cors = require("cors")
 const UserRoutes = require("./routers/user");
 const AuthRoutes = require("./routers/auth");
 const ProductsRoutes = require("./routers/producto")
+const FavoritesRoutes = require("./routers/favorite")
 
 const app = express();
 
@@ -28,6 +29,9 @@ app.use('/api/users', UserRoutes);
 app.use('/api/auth', AuthRoutes)
 
 app.use('/api/productos', ProductsRoutes)
+
+app.use('/api/favorites', FavoritesRoutes)
+
 
 const port = 4000
 app.listen(port , () =>{
