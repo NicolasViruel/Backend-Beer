@@ -3,9 +3,9 @@ mongoose.set('strictQuery', true);
 
 mongoose.set('strictQuery', true);
 
-const UserSchema = mongoose.Schema ({
+const UserSchema = mongoose.Schema({
     name: {
-        String,
+        type: String,
         maxLength: 50,
         minLength: 8,
         require: true
@@ -18,7 +18,7 @@ const UserSchema = mongoose.Schema ({
         minLength: 8
     },
     password: {
-        String,
+        type: String,
         maxLength: 16,
         minLength: 8,
         require: true
