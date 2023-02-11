@@ -10,7 +10,7 @@ const ProductoSchema = mongoose.Schema({
         require: true,
         unique: true,
         minLength: 1,
-        maxLength:50,
+        // maxLength:50,
 
     },
     Productdetalle:{
