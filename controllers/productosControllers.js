@@ -42,10 +42,10 @@ const getProducts = async (req , res) =>{
     }
      
 }
-//crear los productos de la Base:
+
 const createProducts = async (req , res) =>{
  console.log(req.body);
-  //traemos la info del servidor:
+
   const{
   ProductName,
   Productdetalle,
@@ -54,7 +54,7 @@ const createProducts = async (req , res) =>{
   Category,
   Graduation,
   Avaliable}=req.body
-  //creamos el producto:
+
   const newProducto = new ProductosModel({
   ProductName,
   Productdetalle,
@@ -69,21 +69,21 @@ const createProducts = async (req , res) =>{
     console.log(producto);
     return res.status(200).send(producto)
   } catch (error) {
-    console.log(error);
+    console.error(error)
     return res.status(400).send({msg:"Error al intentar crear el producto, producto existente o mal cargado"})
     
   }
 }
-//editar los productos de la Base:
+
 const updateProducts = async (req , res) =>{
-// desestructuramos el id de los params:
+
 const {id}=req.params
-//accedemos al body
+
 const productoData = req.body
 try {
-//buscamos el producto por el id
+
 const productoDB = await ProductosModel.findById(id)
-//reemplazamos el productos, por los valores del body
+
 await ProductosModel.findByIdAndUpdate(id,productoData)
 res.status(200).send({msg:"Producto actualizado correctamente"})
 
@@ -93,7 +93,7 @@ res.status(200).send({msg:"Producto actualizado correctamente"})
 }    
   
 }
-//borrar los productos de la Base:
+
 const deleteProducts =  async(req , res) =>{
     const {id} =req.params
     try {
@@ -105,7 +105,7 @@ const deleteProducts =  async(req , res) =>{
     }
   
 }
-//buscar los productos de la Base:
+
 const findProducts = async(req , res) =>{
     const {id}=req.params
     try {
