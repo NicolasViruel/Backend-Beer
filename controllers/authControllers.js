@@ -4,6 +4,7 @@ const utils_jwt = require("../utils/jwt")
 const Token = require("../models/token")
 const crypto = require("crypto")
 const nodemailer = require("../utils/nodemailer")
+const { log } = require("console")
 
 const register = async(req, res)=>{
     
@@ -66,6 +67,7 @@ const login = async (req, res)=>{
             if (isMatch) {
                 //generamos el Token
                 res.status(200).send({token: utils_jwt.createToken(findUser)})
+                console.log(findUser);
             }else{
                 res.status(400).send({msg:"The email or the password are incorrect"})
             }

@@ -10,8 +10,8 @@ const FavoriteSchema = mongoose.Schema({
     product_id:{
         type: mongoose.Schema.Types.ObjectId,
         require: true,
-        ref: "Producto",
-        unique:true
+        ref: "producto",
+        unique:true,
     }
 })
 

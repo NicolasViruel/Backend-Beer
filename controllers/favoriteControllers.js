@@ -18,9 +18,9 @@ const createFavorites = async (req , res) =>{
    } catch (error) {
         console.error(error)
         return res.status(500).send({msg:"El producto ya existe en la base"});
- }
+        
+    }
 }
-
 const deleteFavorites = async (req , res) =>{
     console.log(req.params);
     const { id } = req.params
@@ -34,7 +34,7 @@ const deleteFavorites = async (req , res) =>{
 
 const getFavorites = async (req , res) =>{
     try {
-        const favorites = await FavoritesModel.find();
+        const favorites = await FavoritesModel.findById(req.params.id).populate("producto");
         if (favorites) {
             return res.status(200).send(favorites);
         }else{
