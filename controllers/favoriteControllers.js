@@ -13,7 +13,6 @@ const createFavorites = async (req , res) =>{
    })
    try {
         const favorite = await newFavorites.save()
-        console.log(favorite);
         return res.status(200).send(favorite)
    } catch (error) {
         console.error(error)
@@ -22,7 +21,6 @@ const createFavorites = async (req , res) =>{
     }
 }
 const deleteFavorites = async (req , res) =>{
-    console.log(req.params);
     const { id } = req.params
     try {
         await FavoritesModel.findByIdAndDelete(id)
@@ -34,7 +32,7 @@ const deleteFavorites = async (req , res) =>{
 
 const getFavorites = async (req , res) =>{
     try {
-        const favorites = await FavoritesModel.findById(req.params.id).populate("producto");
+        const favorites = await FavoritesModel.find({ user_id: req.params.id}).populate("product_id");
         if (favorites) {
             return res.status(200).send(favorites);
         }else{

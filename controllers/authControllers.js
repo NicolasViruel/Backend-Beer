@@ -4,7 +4,6 @@ const utils_jwt = require("../utils/jwt")
 const Token = require("../models/token")
 const crypto = require("crypto")
 const nodemailer = require("../utils/nodemailer")
-const { log } = require("console")
 
 const register = async(req, res)=>{
     
@@ -66,8 +65,7 @@ const login = async (req, res)=>{
             const isMatch = bcrypt.compareSync( password, findUser.password )
             if (isMatch) {
                 //generamos el Token
-                res.status(200).send({token: utils_jwt.createToken(findUser)})
-                console.log(findUser);
+                res.status(200).send({token: utils_jwt.createToken(findUser)});
             }else{
                 res.status(400).send({msg:"The email or the password are incorrect"})
             }
@@ -154,7 +152,6 @@ const newPassword = async(req, res) =>{
             return res.status(400).send({msg:"Token error"})
         }
         const user = await User.findOne(token.userId);
-        console.log(user);
         if (!user) {
             return res.status(400).send({msg:"User error"})
         }
@@ -163,7 +160,6 @@ const newPassword = async(req, res) =>{
         if (isMatch) {
             return res.status(400).send({msg:"Cannot repeat previous key"})
         }
-        console.log(user.password, newPassword);
         
         const salt = bcrypt.genSaltSync(Number(process.env.SALT));
         const passwordHash = bcrypt.hashSync(newPassword,salt);
