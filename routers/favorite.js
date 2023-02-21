@@ -7,6 +7,6 @@ router.post('/', favoriteControllers.createFavorites);
 
 router.delete('/:id', favoriteControllers.deleteFavorites);
 
-router.get('/', favoriteControllers.getFavorites);
+router.get('/:id', favoriteControllers.getFavorites);
 
 module.exports=router

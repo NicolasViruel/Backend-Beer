@@ -1,17 +1,18 @@
 const mongoose = require("mongoose")
+const Producto = require("./producto")
 
 const FavoriteSchema = mongoose.Schema({
     user_id:{
         type: mongoose.Schema.Types.ObjectId,
         require: true,
         ref: "usuario",
-        unique: true
+        
     },
     product_id:{
         type: mongoose.Schema.Types.ObjectId,
         require: true,
-        ref: "producto",
-        unique:true,
+        ref: Producto,
+        
     }
 })
 
