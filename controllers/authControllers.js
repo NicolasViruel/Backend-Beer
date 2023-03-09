@@ -28,7 +28,7 @@ const register = async(req, res)=>{
 
         //creamos el token y enviamos el email
         const token = await Token({
-            userid: newUser._id,
+            userId: newUser._id,
             token: crypto.randomBytes(32).toString("hex")
         })
         console.log(token);
@@ -41,6 +41,7 @@ const register = async(req, res)=>{
         return res.status(200).send(newUser);
     } catch (error) {
         if (error.code === 11000) {
+            console.log(error);
             return res.status(500).send({msg:"The email already exists in the database"});
         }else{
             console.error(error)
