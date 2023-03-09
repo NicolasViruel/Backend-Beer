@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 mongoose.set('strictQuery', true);
 
 const TokenSchema = mongoose.Schema ({
-    userId:{
+    userid:{
         type: mongoose.Schema.Types.ObjectId,
         require: true,
         ref: "usuario",

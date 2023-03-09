@@ -28,9 +28,10 @@ const register = async(req, res)=>{
 
         //creamos el token y enviamos el email
         const token = await Token({
-            userId: newUser._id,
+            userid: newUser._id,
             token: crypto.randomBytes(32).toString("hex")
         })
+        console.log(token);
         await token.save()
 
         const url = `${process.env.URL_API}/api/auth/${newUser._id}/veryfy/${token.token}`
